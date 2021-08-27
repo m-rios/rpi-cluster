@@ -1,0 +1,5 @@
+cluster:
+  hosts:
+    raspberrypi.local
+  vars:
+    ansible_user: pi

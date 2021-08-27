@@ -1,0 +1,10 @@
+---
+- name: Install nomad
+  hosts: cluster
+  become: yes
+  tasks:
+    - name: Copy extract and install nomad 
+      unarchive:
+        src: nomad_1.1.4_linux_arm.zip
+        dest: /usr/local/bin
+        mode: 0755
