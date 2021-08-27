@@ -1,0 +1,18 @@
+#!/bin/bash
+mkdir -p .data/images
+
+cd .data/images
+
+IMAGE_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip
+
+IMAGE_NAME=2021-05-07-raspios-buster-armhf-lite
+
+if [[ -f "$IMAGE_NAME.img" ]]; then
+  echo Image $IMAGE_NAME already present and will not be downloaded
+else
+  echo Downloading $IMAGE_URL
+  curl $IMAGE_URL --output "$IMAGE_NAME.zip"
+  unzip "$IMAGE_NAME.zip"
+  rm "$IMAGE_NAME.zip"
+fi
+
