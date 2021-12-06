@@ -1,0 +1,10 @@
+---
+- name: Install dbxcli
+  hosts: cluster
+  become: yes
+  tasks:
+    - name: Download dbxcli binary
+      get_url:
+        url: https://github.com/m-rios/rpi-cluster/releases/download/v0.0.0/dbxcli-linux-arm
+        dest: /usr/local/bin/dbxcli
+        mode: 0755
