@@ -1,0 +1,10 @@
+---
+- name: Install zip 
+  hosts: cluster
+  become: yes
+  tasks:
+    - name: Install zip
+      apt:
+        name:
+          - zip
+          - unzip
