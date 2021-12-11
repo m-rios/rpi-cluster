@@ -28,7 +28,7 @@
         content: /mnt/storage 192.168.1.0/24 (rw,sync,no_subtree_check)
     - name: Export the FS
       command: exportfs -a
-    - name: Restart nfs-kernel-server.service 
+    - name: Restart nfs-kernel-server.service
       ansible.builtin.systemd:
         daemon_reload: yes
         state: started

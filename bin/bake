@@ -1,4 +1,0 @@
-#!/bin/bash
-bin/download_image
-bin/flash
-bin/post_flash

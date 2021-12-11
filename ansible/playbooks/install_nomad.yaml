@@ -3,8 +3,8 @@
   hosts: cluster
   become: yes
   tasks:
-    - name: Copy extract and install nomad 
-      unarchive:
-        src: nomad_1.1.4_linux_arm.zip
+    - name: Copy extract and install nomad
+      get_url:
+        url: https://github.com/m-rios/rpi-cluster/releases/download/v0.0.0/nomad_1.1.4_linux_arm.zip
         dest: /usr/local/bin
         mode: 0755

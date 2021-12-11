@@ -1,5 +1,5 @@
 ---
-- name: Install zip 
+- name: Install zip
   hosts: cluster
   become: yes
   tasks:
