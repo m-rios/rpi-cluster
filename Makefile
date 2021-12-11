@@ -9,12 +9,10 @@ bootstrap:
 	bootstrap/bin/bake
 
 nomad:
-	cd ansible
-	ansible-playbook playbooks/install_nomad.yaml
+	cd ansible; ansible-playbook playbooks/install_nomad.yaml
 
 nas:
-	cd ansible
-	ansible-playbook playbooks/nas.yaml
+	cd ansible; ansible-playbook playbooks/nas.yaml
 
 .soft_dependencies:
 	echo installing yarn

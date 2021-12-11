@@ -1,6 +1,6 @@
 ---
 - name: Install nomad
-  hosts: cluster
+  hosts: all
   become: yes
   tasks:
     - name: Copy extract and install nomad

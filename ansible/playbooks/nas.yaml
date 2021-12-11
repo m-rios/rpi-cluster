@@ -1,6 +1,6 @@
 ---
 - name: NAS
-  hosts: cluster
+  hosts: servers
   become: yes
   tasks:
     - name: Create mount directory

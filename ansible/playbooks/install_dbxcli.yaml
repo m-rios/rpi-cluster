@@ -1,6 +1,6 @@
 ---
 - name: Install dbxcli
-  hosts: cluster
+  hosts: servers
   become: yes
   tasks:
     - name: Download dbxcli binary

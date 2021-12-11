@@ -1,5 +1,13 @@
-cluster:
-  hosts:
-    raspberrypi.local
-  vars:
-    ansible_user: pi
+all:
+  children:
+    cluster:
+      children:
+        servers:
+          hosts:
+            pi0.local:
+        clients:
+          hosts:
+            pi1.local:
+            pi2.local:
+      vars:
+        ansible_user: pi
