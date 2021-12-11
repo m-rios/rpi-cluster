@@ -1,0 +1,13 @@
+[Unit]
+Description=Nomad Client
+Requires=network.target
+After=nomad-server.service
+Requires=nomad-server.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/nomad agent -config=/etc/nomad/client.hcl
+PIDFile=/var/run/nomad-client.pid
+
+[Install]
+WantedBy=multi-user.target

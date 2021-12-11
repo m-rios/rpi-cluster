@@ -1,0 +1,12 @@
+[Unit]
+Description=Nomad Server
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/nomad agent -config=/etc/nomad/server.hcl
+PIDFile=/var/run/nomad-server.pid
+
+[Install]
+WantedBy=multi-user.target
