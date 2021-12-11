@@ -3,9 +3,9 @@
 :warning: :construction: This documentation and the configuration it describes
 is still very much a WIP. Use it at your own risk
 
-This repository contains all the configuration i use to provision, deploy and maintain
-my raspberry pi cluster. I use ansible to provision the raspberry pi nodes, and nomad
-to orchestrate the applications.
+This repository contains all the configuration i use to provision, deploy and
+maintain my raspberry pi cluster. I use ansible to provision the raspberry pi
+nodes, and nomad to orchestrate the applications.
 
 ## Makefile Reference
 
