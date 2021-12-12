@@ -30,13 +30,28 @@
         src: nomad-server.service
         dest: /etc/systemd/system
         mode: 0744
-        #- name: Install consul service
-        #  ansible.builtin.copy:
-        #    src: consul.service
-        #    dest: /etc/systemd/system
-        #    mode: 0744
-        #- name: Start nomad server
-        #  ansible.builtin.systemd:
-        #    daemon_reload: yes
-        #    state: restarted
-        #    name: nomad-server.service
+    - name: Ensure /etc/consul exists
+      file:
+        path: /etc/consul
+        mode: 0744
+        state: directory
+    - name: Install consul config file
+      ansible.builtin.copy:
+        src: consul.json
+        dest: /etc/consul/
+        mode: 0444
+    - name: Install consul service
+      ansible.builtin.copy:
+        src: consul.service
+        dest: /etc/systemd/system
+        mode: 0744
+    - name: Start consul server
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        state: restarted
+        name: consul.service
+    - name: Start nomad server
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        state: restarted
+        name: nomad-server.service

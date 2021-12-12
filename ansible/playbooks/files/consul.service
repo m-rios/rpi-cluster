@@ -1,0 +1,12 @@
+[Unit]
+Description=Consul Agent
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/consul agent -config-file=/etc/consul/consul.json
+PIDFile=/var/run/nomad-server.pid
+
+[Install]
+WantedBy=multi-user.target
