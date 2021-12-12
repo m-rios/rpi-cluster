@@ -1,0 +1,43 @@
+---
+- name: SMB
+  hosts: servers
+  become: yes
+  vars_prompt:
+    - name: smb_pi_passwd
+      prompt: Type the samba password for user pi
+  vars:
+    samba_users:
+      - username: pi
+        password: "{{ smb_pi_passwd }}"
+  tasks:
+    - name: Install samba
+      apt:
+        name: samba,samba-common-bin
+        update-cache: yes
+    - name: Create samba config export config
+      blockinfile:
+        path: /etc/samba/smb.conf
+        insertafter: EOF
+        create: yes
+        block: |
+          [storage]
+          path = /mnt/storage
+          writeable=Yes
+          create mask=0777
+          directory mask=0777
+          public=no
+    - name: Configure Samba users.
+      shell: >
+        (pdbedit --user={{ item.username }} 2>&1 > /dev/null) || (echo '{{
+        item.password }}'; echo '{{ item.password }}') | smbpasswd -s -a {{
+        item.username }}
+      register: smbpasswd
+      changed_when: "'Added user' in smbpasswd.stdout"
+      with_items: "{{ samba_users }}"
+      loop_control:
+        label: "{{ item.username }}"
+    - name: Restart the samba daemon
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        state: started
+        name: smbd
