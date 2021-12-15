@@ -32,19 +32,19 @@
         mode: 0744
     - name: Ensure /etc/consul exists
       file:
-        path: /etc/consul
+        path: /etc/consul.d
         mode: 0744
         state: directory
     - name: Install consul config file
       ansible.builtin.copy:
         src: consul.json
-        dest: /etc/consul/
+        dest: /etc/consul.d/
         mode: 0444
     - name: Install consul service
       ansible.builtin.copy:
         src: consul.service
         dest: /etc/systemd/system
-        mode: 0744
+        mode: 0444
     - name: Start consul server
       ansible.builtin.systemd:
         daemon_reload: yes

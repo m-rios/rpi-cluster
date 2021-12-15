@@ -1,13 +1,19 @@
 {
+  "addresses": {
+    "http": "127.0.0.1"
+  },
   "bootstrap_expect": 1,
+  "bind_addr": "127.0.0.1",
+  "client_addr": "0.0.0.0",
   "datacenter": "dc1",
   "data_dir": "/opt/consul",
   "log_level": "INFO",
-  "node_name": "rpi0",
-  "bind_addr": "127.0.0.1",
+  "retry_join": ["127.0.0.1"],
   "server": true,
   "telemetry": {
     "statsite_address": "127.0.0.1:2180"
   },
-  "ui": true
+  "ui_config": {
+    "enabled": true
+  }
 }
