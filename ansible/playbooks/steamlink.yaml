@@ -1,0 +1,28 @@
+---
+- name: Install steamlink
+  hosts: steamboxes
+  tasks:
+    - name: Install packages
+      become: yes
+      apt:
+        update-cache: yes
+        name:
+          - steamlink 
+          - xorg
+          - dmenu
+          - dwm
+          - libgles2-mesa
+    - name: make sure .xinitrc exists
+      file:
+        path: .xinitrc
+        state: file 
+        owner: pi
+        group: pi
+        mode: 0740
+    - name: add dwm to .xinitrc
+      lineinfile:
+        path: .xinitrc
+        line: exec dwm
+        owner: pi
+        group: pi
+        mode: 0740

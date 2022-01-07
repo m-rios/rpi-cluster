@@ -9,5 +9,8 @@ all:
           hosts:
             pi1.local:
             pi2.local:
+        steamboxes:
+          hosts:
+            192.168.1.145:
       vars:
         ansible_user: pi
