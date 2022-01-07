@@ -6,7 +6,7 @@ fmt:
 	prettier --write .
 
 bootstrap:
-	bootstrap/bin/bake
+	cd bootstrap; bin/bake
 
 nomad:
 	cd ansible; ansible-playbook playbooks/install_nomad.yaml
