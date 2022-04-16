@@ -13,6 +13,21 @@ server {
 }
 
 client {
-  enabled = true
+  enabled  = true
   cni_path = "/opt/cni/bin"
+
+  host_volume "pihole-etc-pihole" {
+    path = "/mnt/storage/pihole/pihole"
+    read_only = false
+  }
+
+  host_volume "pihole-etc-dnsmasq" {
+    path = "/mnt/storage/pihole/dnsmasq"
+    read_only = false
+  }
+
+  # host_volume "storage" {
+  #   path = "/mnt/storage"
+  #   read_only = false
+  # }
 }

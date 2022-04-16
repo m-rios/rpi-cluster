@@ -1,0 +1,15 @@
+---
+- name: Setup pihole
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Ensure pihole data directory exists
+      file:
+        path: /mnt/storage/pihole/pihole
+        mode: 0777
+        state: directory
+    - name: Ensure pihole dnsmasq directory exists
+      file:
+        path: /mnt/storage/pihole/dnsmasq
+        mode: 0777
+        state: directory
