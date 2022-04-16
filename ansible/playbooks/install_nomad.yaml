@@ -25,6 +25,17 @@
         src: server.hcl
         dest: /etc/nomad/
         mode: 0444
+    - name: Ensure /opt/cni/bin exists
+      file:
+        path: /opt/cni/bin
+        mode: 0744
+        state: directory
+    - name: Install client cni plugins
+      unarchive:
+        remote_src: yes
+        src: https://github.com/m-rios/rpi-cluster/releases/download/v0.0.0/cni-plugins-linux-arm-v1.0.0.tar
+        dest: /opt/cni/bin
+        mode: 0744
     - name: Install server service
       ansible.builtin.copy:
         src: nomad-server.service

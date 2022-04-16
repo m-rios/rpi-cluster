@@ -14,4 +14,5 @@ server {
 
 client {
   enabled = true
+  cni_path = "/opt/cni/bin"
 }
