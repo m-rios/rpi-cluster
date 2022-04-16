@@ -2,11 +2,11 @@ job "demo-webapp" {
   datacenters = ["dc1"]
 
   group "demo" {
-    count = 3
+    count = 1
 
     network {
       port  "http"{
-        to = -1
+        to = 80
       }
     }
 
@@ -16,7 +16,7 @@ job "demo-webapp" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Path(`/myapp`)",
+        "traefik.http.routers.http.rule=Path(`/`)",
       ]
 
       check {
@@ -33,9 +33,22 @@ job "demo-webapp" {
       config {
         image = "nginx:1.20.2"
         ports = ["http"]
+
         volumes = [
-          "./files:/usr/share/nginx/html:ro"
+          "local/index.html:/usr/share/nginx/html/index.html",
         ]
+      }
+
+      template {
+        data = <<EOF
+          <!DOCTYPE html>
+          <html>
+                  <body>
+                          OK
+                  </body>
+          </html>
+        EOF
+        destination = "local/index.html"
       }
     }
   }
