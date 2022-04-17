@@ -54,23 +54,6 @@ job "pihole" {
         image        = "pihole/pihole:2022.04.2"
         network_mode = "bridge"
         ports        = ["http", "dns"]
-
-        # volumes = [
-        #   "/mnt/storage/pihole/pihole:/etc/pihole"
-        # ]
-        # mount {
-        #   type = "bind"
-        #   target = "/etc/pihole"
-        #   source = "/mnt/storage/pihole/pihole"
-        #   readonly = false
-        # }
-
-        # mount {
-        #   type = "bind"
-        #   target = "/etc/dnsmasq"
-        #   source = "/mnt/storage/pihole/dnsmasq"
-        #   readonly = false
-        # }
       }
 
       volume_mount {
