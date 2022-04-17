@@ -48,12 +48,15 @@ job "pihole" {
 
       env {
         DNSMASQ_USER = "root"
+        DNSSEC = "true"
+        TZ = "Europe/Madrid"
       }
 
       config {
         image        = "pihole/pihole:2022.04.2"
         network_mode = "bridge"
         ports        = ["http", "dns"]
+        cap_add      = ["net_admin"]
       }
 
       volume_mount {

@@ -25,9 +25,14 @@ client {
     path = "/mnt/storage/pihole/dnsmasq"
     read_only = false
   }
+}
 
-  # host_volume "storage" {
-  #   path = "/mnt/storage"
-  #   read_only = false
-  # }
+plugin "docker" {
+  config {
+    allow_caps = [
+      "audit_write", "chown", "dac_override", "fowner", "fsetid", "kill", "mknod",
+      "net_bind_service", "setfcap", "setgid", "setpcap", "setuid", "sys_chroot",
+      "net_raw", "sys_nice", "net_admin" # needed by pihole
+    ]
+  }
 }
