@@ -34,5 +34,8 @@ plugin "docker" {
       "net_bind_service", "setfcap", "setgid", "setpcap", "setuid", "sys_chroot",
       "net_raw", "sys_nice", "net_admin" # needed by pihole
     ]
+    volumes {
+      enabled = true
+    }
   }
 }
