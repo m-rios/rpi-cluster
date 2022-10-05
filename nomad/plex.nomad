@@ -1,19 +1,22 @@
 job "plex" {
+  datacenters = ["dc1"]
+
   group "plex" {
+
+    network {
+        port "plex" {
+        static = 32400
+      }
+    }
+
     task "plex" {
       driver = "docker"
-
-        network {
-          port "plex" {
-            static = 32400 
-          }
-        }
 
       env {
         PUID=1000
         PGID=1000
         VERSION=docker
-        # PLEX_CLAIM= #optional
+        # PLEX_CLAIM=
       }
 
       config {
