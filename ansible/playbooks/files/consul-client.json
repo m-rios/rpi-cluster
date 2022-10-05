@@ -1,0 +1,16 @@
+
+{
+  "addresses": {
+    "http": "127.0.0.1"
+  },
+  "bind_addr": "127.0.0.1",
+  "client_addr": "0.0.0.0",
+  "datacenter": "dc1",
+  "data_dir": "/opt/consul",
+  "log_level": "INFO",
+  "retry_join": ["127.0.0.1"],
+  "server": false,
+  "telemetry": {
+    "statsite_address": "127.0.0.1:2180"
+  },
+}
