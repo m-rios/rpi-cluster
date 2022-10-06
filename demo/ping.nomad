@@ -6,6 +6,23 @@ job "ping" {
       port "http" {}
     }
 
+    service {
+      name = "ping"
+      port = "http"
+
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.ping.rule=Host(`ping.pi.cluster`)"
+      ]
+
+      check {
+        type     = "http"
+        path     = "/"
+        interval = "5s"
+        timeout  = "2s"
+      }
+    }
+
     task "ping" {
       driver = "exec"
       

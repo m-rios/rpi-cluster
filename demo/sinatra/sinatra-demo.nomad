@@ -16,7 +16,7 @@ job "sinatra-demo" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Host(`sinatra.pi.cluster`)"
+        "traefik.http.routers.sinatra-demo.rule=Host(`sinatra.pi.cluster`)"
       ]
 
       check {
