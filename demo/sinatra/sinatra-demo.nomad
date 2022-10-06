@@ -5,7 +5,9 @@ job "sinatra-demo" {
     count = 1
 
     network {
-      port  "http" {}
+      port  "http" {
+        to = 4567
+      }
     }
 
     service {
@@ -14,7 +16,7 @@ job "sinatra-demo" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Path(`/sinatra`)",
+        "traefik.http.routers.http.rule=Host(`sinatra.pi.cluster`)"
       ]
 
       check {
@@ -30,6 +32,7 @@ job "sinatra-demo" {
 
       config {
         image = "mariorios/sinatra-demo"
+        force_pull = true
         ports = ["http"]
       }
     }

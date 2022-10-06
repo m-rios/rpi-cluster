@@ -4,3 +4,6 @@ build::
 
 push:: build
 	docker push $(IMAGE_NAME)
+
+deploy::
+	nomad job run sinatra-demo.nomad
