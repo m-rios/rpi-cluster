@@ -3,6 +3,11 @@
   hosts: servers
   become: yes
   tasks:
+    - name: Ensure nomad can set memory quotas on exec drivers via cgroup
+      ansible.builtin.replace:
+        regexp: '^.*rootwait(?! cgroup_enable=memory)$'
+        replace: "\1 cgroup_enable=memory"
+        path: "/boot/cmdline.txt"
     - name: Get nomad agent binary
       unarchive:
         remote_src: yes
