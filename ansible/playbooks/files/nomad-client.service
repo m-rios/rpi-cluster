@@ -1,17 +1,3 @@
-# [Unit]
-# Description=Nomad Client
-# Requires=network.target
-# After=nomad-server.service
-# Requires=nomad-server.service
-# 
-# [Service]
-# Type=forking
-# ExecStart=/usr/local/bin/nomad agent -config=/etc/nomad/client.hcl
-# PIDFile=/var/run/nomad-client.pid
-# 
-# [Install]
-# WantedBy=multi-user.target
-
 [Unit]
 Description=Nomad
 Documentation=https://www.nomadproject.io/docs/
@@ -25,12 +11,6 @@ Wants=consul.service
 After=consul.service
 
 [Service]
-
-# Nomad server should be run as the nomad user. Nomad clients
-# should be run as root
-# User=nomad
-# Group=nomad
-
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/nomad agent -config /etc/nomad/client.hcl
 KillMode=process

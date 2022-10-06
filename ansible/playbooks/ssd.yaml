@@ -1,0 +1,17 @@
+---
+- name: Configure SSDs (still not working)
+  hosts: pi0.local 
+  become: yes
+  tasks:
+    - name: Create /etc/udev/rules.d/custom.rules
+      copy:
+        dest: /etc/udev/rules.d/custom.rules 
+        mode: 0644
+        owner: root
+        group: root
+        content: |
+          SUBSYSTEM=="scsi", ATTRS{model}=="AS2115          ", SYMLINK+="ssd%n"
+    - name: Restart udev
+      systemd:
+        name: udev
+        state: restarted

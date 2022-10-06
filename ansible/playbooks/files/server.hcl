@@ -8,7 +8,7 @@ server {
 
   # This is the IP address of the first server provisioned
   server_join {
-    retry_join = ["pi0.local:4648"]
+    retry_join = ["pi0.cluster"]
   }
 }
 

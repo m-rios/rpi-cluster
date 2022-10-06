@@ -47,7 +47,7 @@
         mode: 0744
         state: directory
     - name: Install consul config file
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: consul-client.json
         dest: /etc/consul.d/consul.json
         mode: 0444

@@ -4,13 +4,10 @@ all:
       children:
         servers:
           hosts:
-            # pi0.local
-            192.168.1.136:
+            pi0.cluster:
         clients:
           hosts:
-            # pi1.local
-            192.168.1.143:
-            # pi2.local
-            192.168.1.145:
+            pi1.cluster:
+            pi2.cluster:
       vars:
         ansible_user: pi

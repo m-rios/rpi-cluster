@@ -1,0 +1,8 @@
+{
+  "bind_addr": "{{ansible_default_ipv4.address}}",
+  "client_addr": "0.0.0.0",
+  "datacenter": "dc1",
+  "data_dir": "/opt/consul",
+  "log_level": "INFO",
+  "retry_join": ["pi0.cluster"]
+}
