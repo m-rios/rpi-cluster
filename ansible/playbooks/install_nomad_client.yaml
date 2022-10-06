@@ -61,8 +61,10 @@
         daemon_reload: yes
         state: restarted
         name: consul.service
+        enabled: yes
     - name: Start nomad client 
       ansible.builtin.systemd:
         daemon_reload: yes
         state: restarted 
         name: nomad-client.service
+        enabled: yes
