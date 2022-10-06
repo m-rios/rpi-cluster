@@ -11,6 +11,9 @@ bootstrap:
 nomad:
 	cd ansible; ansible-playbook playbooks/install_nomad.yaml
 
+nomad-client:
+	cd ansible; ansible-playbook playbooks/install_nomad_client.yaml
+
 nas:
 	cd ansible; ansible-playbook playbooks/nas.yaml
 

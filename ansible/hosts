@@ -4,13 +4,13 @@ all:
       children:
         servers:
           hosts:
-            pi0.local:
+            # pi0.local
+            192.168.1.136:
         clients:
           hosts:
-            pi1.local:
-            pi2.local:
-        steamboxes:
-          hosts:
+            # pi1.local
+            192.168.1.143:
+            # pi2.local
             192.168.1.145:
       vars:
         ansible_user: pi
