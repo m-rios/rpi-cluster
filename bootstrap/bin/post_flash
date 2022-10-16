@@ -30,6 +30,10 @@ sudo mount "${SD_PATH}p1" "$BOOT_PATH"
 trap cleanup ERR
 sudo cp boot/* "$BOOT_PATH"
 
+# Configure PoE hat fan curves
+# WARNING!! This is not idempotent!!
+sudo cat files/config.txt >> "${BOOT_PATH}/config.txt"
+
 cd "$BOOT_PATH"
 
 # Configure WiFi credentials if ssid and psk are provided. Otherwise disable wifi
