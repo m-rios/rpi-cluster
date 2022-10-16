@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 bin/download_image
 bin/flash
 bin/post_flash

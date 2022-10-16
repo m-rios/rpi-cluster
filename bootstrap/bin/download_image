@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 . bin/utils.sh
 
 mkdir -p .data/images
@@ -9,8 +11,21 @@ if [[ -f "$IMAGE_NAME.img" ]]; then
   echo Image $IMAGE_NAME already present and will not be downloaded
 else
   echo Downloading $IMAGE_URL
-  curl $IMAGE_URL --output "$IMAGE_NAME.zip"
-  unzip "$IMAGE_NAME.zip"
-  rm "$IMAGE_NAME.zip"
+  # Tokenize url by / and use last token as download filename
+  DOWNLOAD_FILE=$(echo $IMAGE_URL | awk -F '/' '{print $NF}')
+  curl $IMAGE_URL --output "$DOWNLOAD_FILE"
+  EXT=$(echo $DOWNLOAD_FILE | awk -F '.' '{print $NF}')
+
+  if [[ "zip" = "$EXT" ]]; then
+    unzip "$DOWNLOAD_FILE"
+  elif [[ "xz" = "$EXT" ]]; then
+    xz -d "$DOWNLOAD_FILE"
+  else
+    echo "The extension '${EXT}' of the downloaded image archive is not compatible"
+    exit 2
+  fi
+
+  # remove downloaded archive file. -f here hides errors if file does not exist.
+  rm -f "$DOWNLOAD_FILE"
 fi
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 . bin/utils.sh
 
 cd .data/images
