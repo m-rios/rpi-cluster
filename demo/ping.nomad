@@ -12,7 +12,8 @@ job "ping" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.ping.rule=Host(`ping.pi.cluster`)"
+        "traefik.http.routers.ping.rule=Host(`ping.pi.cluster`)",
+        "traefik.http.routers.pingwan.rule=Host(`ping.mariorios.ddns.net`)"
       ]
 
       check {

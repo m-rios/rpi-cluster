@@ -3,6 +3,12 @@ job "traefik" {
   datacenters = ["dc1"]
   type        = "service"
 
+  affinity {
+    attribute = "${attr.unique.hostname}"
+    operator = "="
+    value = "pi0"
+  }
+
   group "traefik" {
     count = 1
 
@@ -52,6 +58,10 @@ job "traefik" {
     dashboard = true
     insecure  = true
 
+[providers]
+  [providers.file]
+    filename = "local/dynamic.toml"
+
 # Enable Consul Catalog configuration backend.
 [providers.consulCatalog]
     prefix           = "traefik"
@@ -63,6 +73,23 @@ job "traefik" {
 EOF
 
         destination = "local/traefik.toml"
+      }
+
+      template {
+        data = <<EOF
+[http.routers]
+  [http.routers.nomad]
+    rule = "Host(`nomad.pi.cluster`)"
+    service = "nomad"
+
+[http.services]
+  [http.services.nomad.loadBalancer]
+    [[http.services.nomad.loadBalancer.servers]]
+      url = "http://192.168.1.136:4646/"
+
+EOF
+
+        destination = "local/dynamic.toml"
       }
 
       resources {
