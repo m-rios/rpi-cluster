@@ -3,18 +3,47 @@ set -e
 
 . bin/utils.sh
 
-# Mount boot
+cleanup() {
+  # Move away from the mounted directory so we can unmount it
+  cd
+
+  if [ -d "$BOOT_PATH" ]; then
+    sudo umount "$BOOT_PATH"
+    sudo rm -rf "$BOOT_PATH"
+  fi
+
+  if [ -d "$ROOTFS_PATH" ]; then
+    sudo umount "$ROOTFS_PATH"
+    sudo rm -rf "$ROOTFS_PATH"
+  fi
+}
+
 BOOT_PATH="/media/${USER}/boot"
+
+if [ -d "$BOOT_PATH" ]; then
+  cleanup
+fi
+
+# Mount boot
 sudo mkdir -p "$BOOT_PATH"
 sudo mount "${SD_PATH}p1" "$BOOT_PATH"
+trap cleanup ERR
 sudo cp boot/* "$BOOT_PATH"
 
 cd "$BOOT_PATH"
 
-# Configure WiFi credentials
-sudo mv wpa_supplicant.conf wpa_supplicant.conf.input
-sudo sh -c "WIFI_SSID='${WIFI_SSID}' WIFI_PSK='${WIFI_PSK}' envsubst < wpa_supplicant.conf.input > wpa_supplicant.conf"
-sudo rm wpa_supplicant.conf.input
+# Configure WiFi credentials if ssid and psk are provided. Otherwise disable wifi
+if [ ! -z "${WIFI_SSID}" ] && [ ! -z "${WIFI_PSK}" ]; then
+  echo 'Configuring wifi'
+  sudo mv wpa_supplicant.conf wpa_supplicant.conf.input
+  sudo sh -c "WIFI_SSID='${WIFI_SSID}' WIFI_PSK='${WIFI_PSK}' envsubst < wpa_supplicant.conf.input > wpa_supplicant.conf"
+  sudo rm wpa_supplicant.conf.input
+else
+  echo 'Disabling wifi'
+  cfg="dtoverlay=disable-wifi"
+  path="${BOOT_PATH}/config.txt"
+  grep -qxF "$cfg" "$path" || echo "$cfg" | sudo tee -a "$path"
+fi
 
 # Enable ethernet over USB
 # sudo sh -c "echo 'dtoverlay=dwc2' >> config.txt"
@@ -22,13 +51,6 @@ sudo rm wpa_supplicant.conf.input
 # sudo sh -c "sed -i '${s/$/ modules-load=dwc2,g_ether/}' cmdline.txt" # TODO: this isn't working
 
 # Enable cgroup
-
-# Move away from the mounted directory so we can unmount it
-cd
-
-# Unmount and cleanup
-sudo umount "$BOOT_PATH"
-sudo rm -rf "$BOOT_PATH"
 
 # Mount rootfs
 ROOTFS_PATH="/media/${USER}/rootfs"
@@ -41,9 +63,4 @@ cd "$ROOTFS_PATH"
 sudo sh -c "sudo echo "$RPI_HOSTNAME" > etc/hostname"
 sudo sh -c "sed -i "s/raspberrypi/${RPI_HOSTNAME}/" etc/hosts"
 
-# Move away from the mounted directory so we can unmount it
-cd
-
-# Unmount and cleanup
-sudo umount "$ROOTFS_PATH"
-sudo rm -rf "$ROOTFS_PATH"
+cleanup
