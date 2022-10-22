@@ -3,6 +3,8 @@ job "csi-smb-controller" {
 
   type = "service"
 
+  namespace = "system"
+
   group "controller" {
     task "plugin" {
       driver = "docker"

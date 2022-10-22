@@ -3,6 +3,8 @@ job "traefik" {
   datacenters = ["dc1"]
   type        = "service"
 
+  namespace = "system"
+
   affinity {
     attribute = "${attr.unique.hostname}"
     operator = "="

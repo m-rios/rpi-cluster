@@ -3,6 +3,8 @@ job "csi-smb-nodes" {
 
   type = "system"
 
+  namespace = "system"
+
   group "nodes" {
     task "plugin" {
       driver = "docker"
