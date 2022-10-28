@@ -32,7 +32,7 @@ sudo cp boot/* "$BOOT_PATH"
 
 # Configure PoE hat fan curves
 # WARNING!! This is not idempotent!!
-sudo cat files/config.txt >> "${BOOT_PATH}/config.txt"
+cat files/config.txt | sudo tee -a "${BOOT_PATH}/config.txt"
 
 cd "$BOOT_PATH"
 
