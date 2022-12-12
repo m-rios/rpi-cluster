@@ -21,7 +21,7 @@
         create: yes
         block: |
           [storage]
-          path = /mnt/storage
+          path = /mnt/storage/all
           writeable=Yes
           create mask=0777
           directory mask=0777

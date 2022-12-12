@@ -17,13 +17,13 @@ job "minecraft" {
       driver = "java"
 
       artifact {
-        source = "https://piston-data.mojang.com/v1/objects/f69c284232d7c7580bd89a5a4931c3581eae1378/server.jar"  
+        source = "https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec1673ced/server.jar"  
       }
 
       config {
         args = ["--nogui"]
         jar_path = "/local/server.jar"
-        jvm_options = ["-Xmx2048m", "-Xms256m"]
+        jvm_options = ["-Xmx5048m", "-Xms5048m"]
       }
 
       resources {
@@ -50,7 +50,7 @@ enable-command-block=true
 enable-query=false
 generator-settings=
 level-name=world
-motd=Somos comunistas. Pero con mesura.
+motd=Minecraft server running from nomad.
 query.port=25565
 pvp=true
 generate-structures=true

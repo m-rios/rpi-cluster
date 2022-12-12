@@ -1,3 +1,4 @@
+dtoverlay=rpi-poe-plus
 dtparam=poe_fan_temp0=45000,poe_fan_temp0_hyst=3000
 dtparam=poe_fan_temp1=50000,poe_fan_temp1_hyst=3000
 dtparam=poe_fan_temp2=62000,poe_fan_temp2_hyst=4000
