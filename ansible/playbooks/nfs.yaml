@@ -1,0 +1,18 @@
+---
+- name: NFS
+  hosts: servers
+  become: yes
+  vars:
+    nfs_server_exports:
+      - export:
+        access:
+          - hostname: '*'
+            options:
+              - 'rw'
+              - 'sync'
+              - 'no_subtree_check'
+              - 'no_root_squash'
+        mode: 'u=rwx,g=rwx,o=rwx'
+        path: '/mnt/storage'
+  roles:
+    - ansible-nfs-server

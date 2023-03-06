@@ -1,0 +1,3 @@
+[submodule "ansible/playbooks/roles/ansible-nfs-server"]
+	path = ansible/playbooks/roles/ansible-nfs-server
+	url = git@github.com:mrlesmithjr/ansible-nfs-server.git

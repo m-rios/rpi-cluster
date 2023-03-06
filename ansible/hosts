@@ -4,7 +4,7 @@ all:
       children:
         servers:
           hosts:
-            pi0.cluster:
+            pi0.local:
         clients:
           hosts:
             pi1.cluster:
