@@ -49,8 +49,9 @@ Additionally, in order to execute some other actions you might need:
 
 Before being able to provision a raspberrypi node, you must create a bootable sd
 card and setup the network configuration. To do this, insert the sd card and
-take note of its path. Finally, once all parameters have been defined simply
-call:
+take note of its path. Copy `bootstrap/.env.example` to `bootstrap/.env` and customize
+the values to your needs. The wifi fields can be removed if you're planning on using ethernet.
+Finally, once all parameters have been defined simply call:
 
 ```bash
 make bootstrap
