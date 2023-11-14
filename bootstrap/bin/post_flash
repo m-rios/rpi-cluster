@@ -7,12 +7,12 @@ cleanup() {
   # Move away from the mounted directory so we can unmount it
   cd
 
-  if [ -d "$BOOT_PATH" ]; then
+  if [ mountpoint -q "$BOOT_PATH" ]; then
     sudo umount "$BOOT_PATH"
     sudo rm -rf "$BOOT_PATH"
   fi
 
-  if [ -d "$ROOTFS_PATH" ]; then
+  if [ mountpoint -q "$ROOTFS_PATH" ]; then
     sudo umount "$ROOTFS_PATH"
     sudo rm -rf "$ROOTFS_PATH"
   fi
@@ -24,9 +24,15 @@ if [ -d "$BOOT_PATH" ]; then
   cleanup
 fi
 
+# Find partition name
+BOOT_PART_PATH=$(ls -1 ${SD_PATH}* | tail -n2 | head -n1)
+echo boot_partition_path="${BOOT_PART_PATH}"
+ROOTFS_PART_PATH=$(ls -1 ${SD_PATH}* | tail -n1)
+echo rootfs_partition_path="${ROOTFS_PART_PATH}"
+
 # Mount boot
 sudo mkdir -p "$BOOT_PATH"
-sudo mount "${SD_PATH}p1" "$BOOT_PATH"
+sudo mount "${BOOT_PART_PATH}" "$BOOT_PATH"
 trap cleanup ERR
 sudo cp boot/* "$BOOT_PATH"
 
@@ -59,7 +65,7 @@ fi
 # Mount rootfs
 ROOTFS_PATH="/media/${USER}/rootfs"
 sudo mkdir -p "$ROOTFS_PATH"
-sudo mount "${SD_PATH}p2" "$ROOTFS_PATH"
+sudo mount "${ROOTFS_PART_PATH}" "$ROOTFS_PATH"
 
 cd "$ROOTFS_PATH"
 
