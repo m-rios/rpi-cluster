@@ -7,12 +7,12 @@ cleanup() {
   # Move away from the mounted directory so we can unmount it
   cd
 
-  if [ mountpoint -q "$BOOT_PATH" ]; then
+  if [ -d "$BOOT_PATH" ]; then
     sudo umount "$BOOT_PATH"
     sudo rm -rf "$BOOT_PATH"
   fi
 
-  if [ mountpoint -q "$ROOTFS_PATH" ]; then
+  if [ -d "$ROOTFS_PATH" ]; then
     sudo umount "$ROOTFS_PATH"
     sudo rm -rf "$ROOTFS_PATH"
   fi
